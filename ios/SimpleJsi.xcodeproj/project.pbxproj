@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 
 		5E46D8CD2428F78900513E24 /* example.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5E46D8CB2428F78900513E24 /* example.cpp */; };
-		5E555C0D2413F4C50049A1A2 /* SimpleJsi.mm in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* SimpleJsi.mm */; };
+		5E555C0D2413F4C50049A1A2 /* raw.mm in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* raw.mm */; };
 
 /* End PBXBuildFile section */
 
@@ -30,7 +30,7 @@
 
 		5E46D8CB2428F78900513E24 /* example.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = example.cpp; path = ../cpp/example.cpp; sourceTree = "<group>"; };
 		5E46D8CC2428F78900513E24 /* example.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = example.h; path = ../cpp/example.h; sourceTree = "<group>"; };
-		B3E7B5891CC2AC0600A0062D /* SimpleJsi.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SimpleJsi.mm; sourceTree = "<group>"; };
+		B3E7B5891CC2AC0600A0062D /* raw.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = raw.mm; sourceTree = "<group>"; };
 
 /* End PBXFileReference section */
 
@@ -59,7 +59,7 @@
 
 				5E46D8CB2428F78900513E24 /* example.cpp */,
 				5E46D8CC2428F78900513E24 /* example.h */,
-				B3E7B5891CC2AC0600A0062D /* SimpleJsi.mm */,
+				B3E7B5891CC2AC0600A0062D /* raw.mm */,
 
 				134814211AA4EA7D00B7C361 /* Products */,
 			);
@@ -68,9 +68,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		58B511DA1A9E6C8500147676 /* SimpleJsi */ = {
+		58B511DA1A9E6C8500147676 /* raw */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "SimpleJsi" */;
+			buildConfigurationList = 58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "raw" */;
 			buildPhases = (
 				58B511D71A9E6C8500147676 /* Sources */,
 				58B511D81A9E6C8500147676 /* Frameworks */,
@@ -80,7 +80,7 @@
 			);
 			dependencies = (
 			);
-			name = SimpleJsi;
+			name = raw;
 			productName = RCTDataManager;
 			productReference = 134814201AA4EA6300B7C361 /* libSimpleJsi.a */;
 			productType = "com.apple.product-type.library.static";
@@ -99,7 +99,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "SimpleJsi" */;
+			buildConfigurationList = 58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "raw" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -112,7 +112,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				58B511DA1A9E6C8500147676 /* SimpleJsi */,
+				58B511DA1A9E6C8500147676 /* raw */,
 			);
 		};
 /* End PBXProject section */
@@ -124,7 +124,7 @@
 			files = (
 
 				5E46D8CD2428F78900513E24 /* example.cpp in Sources */,
-				5E555C0D2413F4C50049A1A2 /* SimpleJsi.mm in Sources */,
+				5E555C0D2413F4C50049A1A2 /* raw.mm in Sources */,
 
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -236,7 +236,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = SimpleJsi;
+				PRODUCT_NAME = raw;
 				SKIP_INSTALL = YES;
 
 			};
@@ -253,7 +253,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = SimpleJsi;
+				PRODUCT_NAME = raw;
 				SKIP_INSTALL = YES;
 
 			};
@@ -262,7 +262,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "SimpleJsi" */ = {
+		58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "raw" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				58B511ED1A9E6C8500147676 /* Debug */,
@@ -271,7 +271,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "SimpleJsi" */ = {
+		58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "raw" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				58B511F01A9E6C8500147676 /* Debug */,

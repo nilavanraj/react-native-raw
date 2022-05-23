@@ -8,32 +8,27 @@ import { NativeModules } from 'react-native';
 
 //@ts-ignore
 const simpleJsiModule: {
-  helloWorld(): string;
-  multiplyWithCallback(
-    x: number,
-    y: number,
-    callback: (z: number) => void
+  foo(
+    callback: (error: string | undefined, value: string | undefined) => void
   ): void;
-  multiply(x: number, y: number): number;
-  getDeviceName(): string;
-  setItem(key: string, value: string): boolean;
-  getItem(key: string): string;
-  foo(callback:(error:string | undefined,value:string | undefined) => void):void
+  Dir: object;
   //@ts-ignore
 } = global;
 
 export function isLoaded() {
-  return typeof simpleJsiModule.getItem === 'function';
+  return typeof simpleJsiModule.foo === 'function';
 }
 
 if (!isLoaded()) {
-  const result = NativeModules.SimpleJsi?.install();
+  NativeModules.raw?.Dir((event: any) => {
+    simpleJsiModule.Dir = event;
+  });
+  const result = NativeModules.raw?.install();
   if (!result && !isLoaded())
-    throw new Error('JSI bindings were not installed for: SimpleJsi Module');
+    throw new Error('JSI bindings were not installed for: raw Module');
 
   if (!isLoaded()) {
-    throw new Error('JSI bindings were not installed for: SimpleJsi Module');
+    throw new Error('JSI bindings were not installed for: raw Module');
   }
 }
-
 export default simpleJsiModule;

@@ -83,122 +83,6 @@ static jstring string2jstring(JNIEnv *env, const string &str) {
 }
 
 
-void install(facebook::jsi::Runtime &jsiRuntime) {
-
-    auto getDeviceName = Function::createFromHostFunction(jsiRuntime,
-                                                          PropNameID::forAscii(jsiRuntime,
-                                                                               "getDeviceName"),
-                                                          0,
-                                                          [](Runtime &runtime,
-                                                             const Value &thisValue,
-                                                             const Value *arguments,
-                                                             size_t count) -> Value {
-
-                                                              JNIEnv *jniEnv = GetJniEnv();
-
-                                                              java_class = jniEnv->GetObjectClass(
-                                                                      java_object);
-                                                              jmethodID getModel = jniEnv->GetMethodID(
-                                                                      java_class, "getModel",
-                                                                      "()Ljava/lang/String;");
-                                                              jobject result = jniEnv->CallObjectMethod(
-                                                                      java_object, getModel);
-                                                              const char *str = jniEnv->GetStringUTFChars(
-                                                                      (jstring) result, NULL);
-
-                                                              return Value(runtime,
-                                                                           String::createFromUtf8(
-                                                                                   runtime, str));
-
-                                                          });
-
-    jsiRuntime.global().setProperty(jsiRuntime, "getDeviceName", move(getDeviceName));
-
-
-    auto setItem = Function::createFromHostFunction(jsiRuntime,
-                                                    PropNameID::forAscii(jsiRuntime,
-                                                                         "setItem"),
-                                                    2,
-                                                    [](Runtime &runtime,
-                                                       const Value &thisValue,
-                                                       const Value *arguments,
-                                                       size_t count) -> Value {
-
-                                                        string key = arguments[0].getString(
-                                                                runtime).utf8(runtime);
-                                                        string value = arguments[1].getString(
-                                                                runtime).utf8(runtime);
-
-                                                        JNIEnv *jniEnv = GetJniEnv();
-
-                                                        java_class = jniEnv->GetObjectClass(
-                                                                java_object);
-
-
-                                                        jmethodID set = jniEnv->GetMethodID(
-                                                                java_class, "setItem",
-                                                                "(Ljava/lang/String;Ljava/lang/String;)V");
-
-                                                        jstring jstr1 = string2jstring(jniEnv,
-                                                                                       key);
-                                                        jstring jstr2 = string2jstring(jniEnv,
-                                                                                       value);
-                                                        jvalue params[2];
-                                                        params[0].l = jstr1;
-                                                        params[1].l = jstr2;
-
-                                                        jniEnv->CallVoidMethodA(
-                                                                java_object, set, params);
-
-                                                        return Value(true);
-
-                                                    });
-
-    jsiRuntime.global().setProperty(jsiRuntime, "setItem", move(setItem));
-
-
-    auto getItem = Function::createFromHostFunction(jsiRuntime,
-                                                    PropNameID::forAscii(jsiRuntime,
-                                                                         "getItem"),
-                                                    1,
-                                                    [](Runtime &runtime,
-                                                       const Value &thisValue,
-                                                       const Value *arguments,
-                                                       size_t count) -> Value {
-
-                                                        string key = arguments[0].getString(
-                                                                        runtime)
-                                                                .utf8(
-                                                                        runtime);
-
-                                                        JNIEnv *jniEnv = GetJniEnv();
-
-                                                        java_class = jniEnv->GetObjectClass(
-                                                                java_object);
-                                                        jmethodID get = jniEnv->GetMethodID(
-                                                                java_class, "getItem",
-                                                                "(Ljava/lang/String;)Ljava/lang/String;");
-
-                                                        jstring jstr1 = string2jstring(jniEnv,
-                                                                                       key);
-                                                        jvalue params[2];
-                                                        params[0].l = jstr1;
-
-                                                        jobject result = jniEnv->CallObjectMethodA(
-                                                                java_object, get, params);
-                                                        const char *str = jniEnv->GetStringUTFChars(
-                                                                (jstring) result, NULL);
-
-                                                        return Value(runtime,
-                                                                     String::createFromUtf8(
-                                                                             runtime, str));
-
-                                                    });
-
-    jsiRuntime.global().setProperty(jsiRuntime, "getItem", move(getItem));
-
-}
-
 extern "C"
 JNIEXPORT void JNICALL
 Java_com_reactnativesimplejsi_SimpleJsiModule_nativeInstall(JNIEnv *env, jobject thiz, jlong jsi) {
@@ -207,7 +91,6 @@ Java_com_reactnativesimplejsi_SimpleJsiModule_nativeInstall(JNIEnv *env, jobject
 
     if (runtime) {
         example::install(*runtime);
-        install(*runtime);
     }
 
     env->GetJavaVM(&java_vm);

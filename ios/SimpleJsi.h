@@ -1,6 +1,6 @@
 #import <React/RCTBridgeModule.h>
 
-@interface SimpleJsi : NSObject <RCTBridgeModule>
+@interface raw : NSObject <RCTBridgeModule>
 
 @property (nonatomic, assign) BOOL setBridgeOnMainQueue;
 

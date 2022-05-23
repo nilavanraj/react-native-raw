@@ -1,5 +1,5 @@
 {
-  "name": "react-native-jsi-template",
+  "name": "react-native-raw",
   "version": "0.3.0",
   "description": "How to build a jsi module example library",
   "main": "./src/index.ts",
@@ -10,7 +10,7 @@
     "android",
     "ios",
     "cpp",
-    "react-native-jsi-template.podspec",
+    "react-native-raw.podspec",
     "!lib/typescript/example",
     "!android/build",
     "!ios/build",
@@ -33,13 +33,13 @@
     "ios",
     "android"
   ],
-  "repository": "https://github.com/ammarahm-ed/react-native-jsi-template",
+  "repository": "https://github.com/ammarahm-ed/react-native-raw",
   "author": "ammarahm-ed <ammarahmed6506@gmail.com> (https://github.com/ammarahm-ed)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ammarahm-ed/react-native-jsi-template/issues"
+    "url": "https://github.com/ammarahm-ed/react-native-raw/issues"
   },
-  "homepage": "https://github.com/ammarahm-ed/react-native-jsi-template#readme",
+  "homepage": "https://github.com/ammarahm-ed/react-native-raw#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },

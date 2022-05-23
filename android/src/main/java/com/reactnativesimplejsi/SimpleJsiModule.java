@@ -2,24 +2,35 @@ package com.reactnativesimplejsi;
 
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.content.Context;
 
 import androidx.annotation.NonNull;
 
+import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.JavaScriptContextHolder;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
+import com.facebook.react.bridge.WritableNativeMap;
 import com.facebook.react.module.annotations.ReactModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.WritableMap;
+import java.util.Map;
+import java.util.HashMap;
 
 @ReactModule(name = SimpleJsiModule.NAME)
 public class SimpleJsiModule extends ReactContextBaseJavaModule {
-  public static final String NAME = "SimpleJsi";
+  public static final String NAME = "raw";
   private native void nativeInstall(long jsiPtr, String docDir);
 
   public SimpleJsiModule(ReactApplicationContext reactContext) {
     super(reactContext);
+   // reactContext.getExternalStorageDirectory()
+   //  Log.e("multiply: ", reactContext.getDir("imageDir", Context.MODE_PRIVATE).toString()); ;
+
+     Log.e("multiply: ",     Environment.getExternalStorageDirectory().toString()); ;
   }
 
   @Override
@@ -44,28 +55,25 @@ public class SimpleJsiModule extends ReactContextBaseJavaModule {
     }
   }
 
-  public String getModel() {
-    String manufacturer = Build.MANUFACTURER;
-    String model = Build.MODEL;
-    if (model.startsWith(manufacturer)) {
-      return model;
-    } else {
-      return manufacturer + " " + model;
+  @ReactMethod(isBlockingSynchronousMethod = true)
+  public void  Dir(Callback cb) {
+    Map<String, Object> res = new HashMap<>();
+    ReactApplicationContext context = getReactApplicationContext();
+    res.put("DocumentDir", context.getFilesDir().getAbsolutePath());
+    res.put("CacheDir", context.getCacheDir().getAbsolutePath());
+    res.put("DCIMDir", context.getExternalFilesDir(Environment.DIRECTORY_DCIM).getAbsolutePath());
+    res.put("PictureDir", context.getExternalFilesDir(Environment.DIRECTORY_PICTURES).getAbsolutePath());
+    res.put("MusicDir", context.getExternalFilesDir(Environment.DIRECTORY_MUSIC).getAbsolutePath());
+    res.put("DownloadDir", context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath());
+    res.put("MovieDir", context.getExternalFilesDir(Environment.DIRECTORY_MOVIES).getAbsolutePath());
+    res.put("RingtoneDir", context.getExternalFilesDir(Environment.DIRECTORY_RINGTONES).getAbsolutePath());
+    WritableMap map = new WritableNativeMap();
+
+    for (Map.Entry<String, Object> entry : res.entrySet()) {
+      map.putString(entry.getKey(), (String) entry.getValue());
     }
-  }
+    cb.invoke(map);
 
-  public void setItem(final String key, final String value) {
-
-    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this.getReactApplicationContext());
-    SharedPreferences.Editor editor = preferences.edit();
-    editor.putString(key,value);
-    editor.apply();
-  }
-
-  public String getItem(final String key) {
-    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this.getReactApplicationContext());
-    String value = preferences.getString(key, "");
-    return value;
   }
 
 }

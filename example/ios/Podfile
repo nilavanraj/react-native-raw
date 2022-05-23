@@ -12,7 +12,7 @@ target 'example' do
     :hermes_enabled => false
   )
   
-  pod 'react-native-jsi-template', :path => '../..'
+  pod 'react-native-raw', :path => '../..'
 
   target 'exampleTests' do
     inherit! :complete

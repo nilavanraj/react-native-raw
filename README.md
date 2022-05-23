@@ -1,4 +1,4 @@
-# react-native-jsi-template
+# react-native-raw
 
 This is an example library that explains how anyone can build jsi modules from scratch in React Native. This code is written as a support project for my [blog](https://blog.notesnook.com/getting-started-react-native-jsi/).
 
@@ -27,7 +27,7 @@ The relevant code is present in `cpp/example.cpp` file.
 ```
 
 ### Platform specific
-The relevant code on android is in `android/cpp-adapter.cpp` and `ios/SimpleJsi.mm` on iOS.
+The relevant code on android is in `android/cpp-adapter.cpp` and `ios/raw.mm` on iOS.
 ```ts
     getDeviceName():string
     
@@ -38,7 +38,7 @@ The relevant code on android is in `android/cpp-adapter.cpp` and `ios/SimpleJsi.
 
 ## Basic usage example
 ```tsx
-import simpleJsiModule from "react-native-jsi-template";
+import simpleJsiModule from "react-native-raw";
 
 simpleJsiModule.helloWorld() // returns helloworld.
 ```
