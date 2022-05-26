@@ -2,6 +2,8 @@
 
 This is an example library that explains how anyone can build jsi modules from scratch in React Native. This code is written as a support project for my [blog](https://blog.notesnook.com/getting-started-react-native-jsi/).
 
+![Screenshot (56)](https://user-images.githubusercontent.com/58332892/170034873-f3ec5ab4-78ac-4d19-a5eb-e0f0f843d0a0.png)
+
 ## Installation
 
 ```sh
