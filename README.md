@@ -3,7 +3,11 @@
 This is a React Native JSI read and Write library that works 2x faster then the conventional React Native read and Write library .
 
 ![Screenshot-_56_](https://user-images.githubusercontent.com/58332892/170806978-1d0e02d9-aae3-4728-a3fd-a3b990683a98.svg)
-![imageCrop-min](https://user-images.githubusercontent.com/58332892/170808775-8bf12948-9826-4497-9dfc-5bc2bba7e7c2.png)
+<div align="center">
+    <img src="https://user-images.githubusercontent.com/58332892/170808775-8bf12948-9826-4497-9dfc-5bc2bba7e7c2.png"  height="400" alt="css-in-readme">
+</div>
+
+
 
 
 ## Installation
