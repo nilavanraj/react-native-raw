@@ -29,7 +29,7 @@ if (EXISTS "${LIBRN_DIR}/libjsi.so")
           ${PACKAGE_NAME}
           SHARED
           ../cpp/example.cpp
-          ./cpp-adapter.cpp
+          ../cpp/cpp-adapter.cpp
   )
 else()
   # React Native 0.65.x and below
@@ -39,7 +39,7 @@ else()
           SHARED
           ../../react-native/ReactCommon/jsi/jsi/jsi.cpp
           ../cpp/example.cpp
-          ./cpp-adapter.cpp
+          ../cpp/cpp-adapter.cpp
   )
 endif()
 
