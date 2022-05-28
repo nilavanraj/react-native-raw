@@ -1,8 +1,9 @@
 # react-native-raw
 
 This is an example library that explains how anyone can build jsi modules from scratch in React Native. This code is written as a support project for my [blog](https://blog.notesnook.com/getting-started-react-native-jsi/).
+![Screenshot-_56_](https://user-images.githubusercontent.com/58332892/170806978-1d0e02d9-aae3-4728-a3fd-a3b990683a98.svg)
+![imageCrop-min](https://user-images.githubusercontent.com/58332892/170808775-8bf12948-9826-4497-9dfc-5bc2bba7e7c2.png)
 
-![Screenshot (56)](https://user-images.githubusercontent.com/58332892/170034873-f3ec5ab4-78ac-4d19-a5eb-e0f0f843d0a0.png)
 
 ## Installation
 
