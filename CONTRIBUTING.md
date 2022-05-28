@@ -53,7 +53,7 @@ yarn test
 
 To edit the Objective-C files, open `example/ios/SimpleJsiExample.xcworkspace` in XCode and find the source files at `Pods > Development Pods > react-native-simple-jsi`.
 
-To edit the Kotlin files, open `example/android` in Android studio and find the source files at `reactnativesimplejsi` under `Android`.
+To edit the Kotlin files, open `example/android` in Android studio and find the source files at `react-native-raw` under `Android`.
 
 ### Commit message convention
 

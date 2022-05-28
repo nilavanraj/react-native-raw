@@ -216,7 +216,7 @@ dependencies {
         implementation jscFlavor
     }
 
-    implementation project(':reactnativesimplejsi')
+    implementation project(':reactnativeraw')
 }
 
 // Run this once to be able to run the application with BUCK
