@@ -1,6 +1,6 @@
 {
   "name": "react-native-raw",
-  "version": "0.3.0",
+  "version": "0.1.0",
   "description": "How to build a jsi module example library",
   "main": "./src/index.ts",
   "source": "src/index",
@@ -33,13 +33,13 @@
     "ios",
     "android"
   ],
-  "repository": "https://github.com/ammarahm-ed/react-native-raw",
-  "author": "ammarahm-ed <ammarahmed6506@gmail.com> (https://github.com/ammarahm-ed)",
+  "repository": "https://github.com/nilavanraj/react-native-raw",
+  "author": "Nilavan Raj <58332892+nilavanraj@users.noreply.github.com> (https://github.com/nilavanraj)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ammarahm-ed/react-native-raw/issues"
+    "url": "https://github.com/nilavanraj/react-native-raw/issues"
   },
-  "homepage": "https://github.com/ammarahm-ed/react-native-raw#readme",
+  "homepage": "https://github.com/nilavanraj/react-native-raw#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },

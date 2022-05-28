@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 //@ts-ignore we want to ignore everything
 // else in global except what we need to access.
 // Maybe there is a better way to do this.
@@ -7,8 +8,13 @@ import { NativeModules } from 'react-native';
 // https://github.com/mrousavy/react-native-mmkv
 
 //@ts-ignore
-const simpleJsiModule: {
-  foo(
+const rawJsiModule: {
+  readSync():string;
+  writeSync():string;
+  readAsync(
+    callback: (error: string | undefined, value: string | undefined) => void
+  ): void;
+  writeAsync(
     callback: (error: string | undefined, value: string | undefined) => void
   ): void;
   Dir: object;
@@ -16,13 +22,11 @@ const simpleJsiModule: {
 } = global;
 
 export function isLoaded() {
-  return typeof simpleJsiModule.foo === 'function';
+  return typeof rawJsiModule.readAsync === 'function';
 }
 
 if (!isLoaded()) {
-  NativeModules.raw?.Dir((event: any) => {
-    simpleJsiModule.Dir = event;
-  });
+  rawJsiModule.Dir=NativeModules.raw?.Dir();
   const result = NativeModules.raw?.install();
   if (!result && !isLoaded())
     throw new Error('JSI bindings were not installed for: raw Module');
@@ -31,4 +35,4 @@ if (!isLoaded()) {
     throw new Error('JSI bindings were not installed for: raw Module');
   }
 }
-export default simpleJsiModule;
+export default rawJsiModule;

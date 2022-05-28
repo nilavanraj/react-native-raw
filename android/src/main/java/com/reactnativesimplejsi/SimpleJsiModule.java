@@ -27,10 +27,6 @@ public class SimpleJsiModule extends ReactContextBaseJavaModule {
 
   public SimpleJsiModule(ReactApplicationContext reactContext) {
     super(reactContext);
-   // reactContext.getExternalStorageDirectory()
-   //  Log.e("multiply: ", reactContext.getDir("imageDir", Context.MODE_PRIVATE).toString()); ;
-
-     Log.e("multiply: ",     Environment.getExternalStorageDirectory().toString()); ;
   }
 
   @Override
@@ -56,7 +52,7 @@ public class SimpleJsiModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod(isBlockingSynchronousMethod = true)
-  public void  Dir(Callback cb) {
+  public WritableMap  Dir() {
     Map<String, Object> res = new HashMap<>();
     ReactApplicationContext context = getReactApplicationContext();
     res.put("DocumentDir", context.getFilesDir().getAbsolutePath());
@@ -72,7 +68,7 @@ public class SimpleJsiModule extends ReactContextBaseJavaModule {
     for (Map.Entry<String, Object> entry : res.entrySet()) {
       map.putString(entry.getKey(), (String) entry.getValue());
     }
-    cb.invoke(map);
+    return(map);
 
   }
 
