@@ -1,4 +1,4 @@
-package com.reactnativesimplejsi;
+package com.reactnativeraw;
 
 import android.content.SharedPreferences;
 import android.os.Build;
