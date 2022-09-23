@@ -79,7 +79,7 @@ RingtoneDir } = rawJsiModule.Dir
 
 ```ts
     // Data must be base64 
-    readAsync(
+    writeAsync(
     data:string, 
     path:string,
     callback(error:string,payload:string):void):string;
@@ -87,7 +87,7 @@ RingtoneDir } = rawJsiModule.Dir
 ### RAW asynchronous Read 
 
 ```ts
-     writeSync(
+     readAsync(
     path:string,
     callback(error:string,payload:string):void):string;
 ```
