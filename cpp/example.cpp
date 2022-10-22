@@ -137,7 +137,30 @@ string base64_encode_image(const string& path) {
 
     return ret;
 }
+std::string  base64_decode_image_concurrent(const string& input, const string& path,const double& pos) {
+  ofstream outfile;
+    outfile.open(path, std::ios::in | std::ios::out | std::ios::binary);
 
+    if (!outfile)
+    {
+        outfile.open(path, ios::binary);
+ 
+        outfile.close();
+        // re-open with original flags
+        outfile.open(path, std::ios::in | std::ios::out | std::ios::binary );
+    }
+   
+    string temp = base64_decode(input.c_str(), input.size());
+    outfile.seekp(pos);
+    outfile.write(temp.c_str(), temp.size());
+    outfile.close();
+    if (outfile)
+        return "File Created";
+    else
+        return "Failed to Create File";
+
+    // __android_log_print(ANDROID_LOG_VERBOSE, "LOG_TAG","%s\n", input.c_str()  );
+}
 string ReadFileByBlocks(const char* filename)
 {
     vector<string> vecstr;
@@ -214,7 +237,7 @@ void install(Runtime &jsiRuntime) {
     jsiRuntime.global().setProperty(jsiRuntime, "writeSync", move(writeSync));
 
 
-    auto readAsync = Function::createFromHostFunction(
+auto readAsync = Function::createFromHostFunction(
             jsiRuntime,
             PropNameID::forAscii(jsiRuntime, "readAsync"),
             1,
@@ -240,7 +263,7 @@ void install(Runtime &jsiRuntime) {
     );
     jsiRuntime.global().setProperty(jsiRuntime, "readAsync", std::move(readAsync));
 
-    auto writeAsync = Function::createFromHostFunction(
+auto writeAsync = Function::createFromHostFunction(
             jsiRuntime,
             PropNameID::forAscii(jsiRuntime, "writeAsync"),
             1,
@@ -265,6 +288,32 @@ void install(Runtime &jsiRuntime) {
             }
     );
     jsiRuntime.global().setProperty(jsiRuntime, "writeAsync", std::move(writeAsync));
+
+auto writeConcurrent = Function::createFromHostFunction(
+            jsiRuntime,
+            PropNameID::forAscii(jsiRuntime, "writeConcurrent"),
+            1,
+            [](Runtime& runtime, const Value& thisValue, const Value* arguments, size_t count) -> Value {
+
+                auto userCallbackRef = std::make_shared<Object>(arguments[3].getObject(runtime));
+                string x = arguments[0].getString(runtime).utf8(runtime);
+                string path = arguments[1].getString(runtime).utf8(runtime);
+                double loc = arguments[2].getNumber();
+                auto f = [&runtime](shared_ptr<Object> userCallbackRef, string x,string path,double loc) {
+                    string result = base64_decode_image_concurrent(x,path,loc);
+                    auto val = String::createFromUtf8(runtime, result);
+                    auto error = Value::undefined();
+                    userCallbackRef->asFunction(runtime).call(runtime, error, val);
+                };
+
+                std::thread thread_object(f,userCallbackRef,x,path,loc);
+                thread_object.detach();
+
+                return Value::undefined();
+            }
+    );
+    jsiRuntime.global().setProperty(jsiRuntime, "writeConcurrent", std::move(writeConcurrent));
+    
 }
 
 }

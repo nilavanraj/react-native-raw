@@ -248,6 +248,32 @@ const base64Icon = 'data:image/png;base64,' + ImageBase64;
         style={styles.button}>
         <Text style={styles.buttonTxt}>reset</Text>
       </TouchableOpacity>
+      {/* write Concurrent */}
+      <TouchableOpacity
+        onPress={() => {
+       
+              rawJsiModule.writeConcurrent(
+                "",
+                rawJsiModule.Dir.PictureDir + filename,
+                0,
+                (error,data)=>{
+                  console.log(error,data)
+                 
+                  });
+
+                  rawJsiModule.writeConcurrent(
+                    "",
+                    rawJsiModule.Dir.PictureDir + filename,
+                    7545,
+                    (error,data)=>{
+                      console.log(error,data)
+                     
+                      });
+            }}
+        style={styles.button}>
+        <Text style={styles.buttonTxt}>write Concurrent</Text>
+      </TouchableOpacity>
+
       {ImageBase64 ? (
         <Image
           style={{

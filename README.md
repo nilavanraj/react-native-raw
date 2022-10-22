@@ -92,6 +92,16 @@ RingtoneDir } = rawJsiModule.Dir
     callback(error:string,payload:string):void):string;
 ```
 
+### RAW Concurrent Write 
+
+```ts
+    // Data must be base64 
+    writeConcurrent(
+    data:string, 
+    path:string,
+    seekp:number,
+    callback(error:string,payload:string):void):string;
+```
 
 ## Thanks to the template & author:
 The initial work done by ammarahm-ed has helped a lot in writing this repo.

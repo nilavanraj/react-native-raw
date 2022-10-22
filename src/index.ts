@@ -17,6 +17,9 @@ const rawJsiModule: {
   writeAsync(
     callback: (error: string | undefined, value: string | undefined) => void
   ): void;
+  writeConcurrent(
+    callback: (error: string | undefined, value: string | undefined) => void
+  ): void;
   Dir: object;
   //@ts-ignore
 } = global;
