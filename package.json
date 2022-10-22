@@ -1,6 +1,6 @@
 {
   "name": "react-native-raw",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "This is a React Native JSI read and Write library that works 2x faster then the conventional React Native read and Write library .",
   "main": "./src/index.ts",
   "source": "src/index",
