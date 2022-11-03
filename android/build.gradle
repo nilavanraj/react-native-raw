@@ -21,12 +21,32 @@ def getExtOrDefault(name, defaultValue) {
   return rootProject.ext.has(name) ? rootProject.ext.get(name) : defaultValue
 }
 
+static def findNodeModules(baseDir) {
+  def basePath = baseDir.toPath().normalize()
+  // Node's module resolution algorithm searches up to the root directory,
+  // after which the base path will be null
+  while (basePath) {
+    def nodeModulesPath = Paths.get(basePath.toString(), "node_modules")
+    def reactNativePath = Paths.get(nodeModulesPath.toString(), "react-native")
+    if (nodeModulesPath.toFile().exists() && reactNativePath.toFile().exists()) {
+      return nodeModulesPath.toString()
+    }
+    basePath = basePath.getParent()
+  }
+  throw new GradleException("MMKV: Failed to find node_modules/ path!")
+}
+
 def found = false
 def basePath = projectDir.toPath().normalize()
 
 // Find node_modules inside the example project
 def nodeModulesDir = Paths.get(basePath.getParent().toString(), "example/node_modules")
 def reactNativeDir = Paths.get(nodeModulesDir.toString(), "react-native/android")
+def nodeModules = findNodeModules(projectDir)
+def reactProperties = new Properties()
+file("$nodeModules/react-native/ReactAndroid/gradle.properties").withInputStream { reactProperties.load(it) }
+def REACT_NATIVE_VERSION = reactProperties.getProperty("VERSION_NAME").split("\\.")[1].toInteger()
+
 if (nodeModulesDir.toFile().exists() && reactNativeDir.toFile().exists()) {
   found = true
 }
@@ -110,8 +130,17 @@ repositories {
 dependencies {
   //noinspection GradleDynamicVersion
   implementation 'com.facebook.react:react-native:+'
-
-  def rnAAR = fileTree(reactNativePath).matching({ it.include "**/**/*.aar" }).singleFile
+      def buildType = "debug"
+    tasks.all({ task ->
+      if (task.name == "buildCMakeRelease") {
+        buildType = "release"
+      }
+    })
+    def rnAarMatcher = "**/react-native/**/*${buildType}.aar"
+if (REACT_NATIVE_VERSION < 69) {
+      rnAarMatcher = "**/**/*.aar"
+    }
+  def rnAAR = fileTree(reactNativePath).matching({ it.include rnAarMatcher }).singleFile
   extractJNI(files(rnAAR))
 }
 
